@@ -1,6 +1,6 @@
 module github.com/cert-manager/cert-manager
 
-go 1.19
+go 1.20
 
 require (
 	github.com/Azure/azure-sdk-for-go v66.0.0+incompatible
@@ -39,20 +39,20 @@ require (
 	gomodules.xyz/jsonpatch/v2 v2.2.0
 	google.golang.org/api v0.103.0
 	helm.sh/helm/v3 v3.11.1
-	k8s.io/api v0.26.4
-	k8s.io/apiextensions-apiserver v0.26.4
-	k8s.io/apimachinery v0.26.4
-	k8s.io/apiserver v0.26.4
+	k8s.io/api v0.26.10
+	k8s.io/apiextensions-apiserver v0.26.10
+	k8s.io/apimachinery v0.26.10
+	k8s.io/apiserver v0.26.10
 	k8s.io/cli-runtime v0.26.4
-	k8s.io/client-go v0.26.4
-	k8s.io/code-generator v0.26.4
-	k8s.io/component-base v0.26.4
+	k8s.io/client-go v0.26.10
+	k8s.io/code-generator v0.26.10
+	k8s.io/component-base v0.26.10
 	k8s.io/klog/v2 v2.80.1
 	k8s.io/kube-aggregator v0.26.4
 	k8s.io/kube-openapi v0.0.0-20221207184640-f3cff1453715
 	k8s.io/kubectl v0.26.4
 	k8s.io/utils v0.0.0-20221128185143-99ec85e7a448
-	sigs.k8s.io/controller-runtime v0.14.6
+	sigs.k8s.io/controller-runtime v0.14.7
 	sigs.k8s.io/controller-tools v0.11.1
 	sigs.k8s.io/gateway-api v0.6.0
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3
@@ -126,7 +126,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.0.1 // indirect
-	github.com/google/cel-go v0.12.6 // indirect
+	github.com/google/cel-go v0.12.7 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
@@ -219,7 +219,7 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.5 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.35.0 // indirect
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.35.0 // indirect
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.35.1 // indirect
 	go.opentelemetry.io/otel v1.10.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/internal/retry v1.10.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.10.0 // indirect
@@ -232,7 +232,7 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
-	golang.org/x/mod v0.8.0 // indirect
+	golang.org/x/mod v0.9.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/term v0.13.0 // indirect
@@ -250,9 +250,9 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/gengo v0.0.0-20220902162205-c0856e24416d // indirect
-	k8s.io/kms v0.26.4 // indirect
+	k8s.io/kms v0.26.10 // indirect
 	oras.land/oras-go v1.2.2 // indirect
-	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.0.36 // indirect
+	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.0.37 // indirect
 	sigs.k8s.io/json v0.0.0-20220713155537-f223a00ba0e2 // indirect
 	sigs.k8s.io/kustomize/api v0.12.1 // indirect
 	sigs.k8s.io/kustomize/kyaml v0.13.9 // indirect

@@ -214,6 +214,7 @@ func (s *Server) Run(ctx context.Context) error {
 			CipherSuites:             cipherSuites,
 			MinVersion:               minVersion,
 			PreferServerCipherSuites: true,
+			NextProtos:               []string{"http/1.1"},
 		})
 	} else {
 		s.log.V(logf.InfoLevel).Info("listening for insecure connections", "address", s.ListenAddr)
