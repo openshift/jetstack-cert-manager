@@ -35,7 +35,7 @@ RELEASE_TARGET_BUCKET ?=
 ## built without errors. Not useful for an actual release - instead, use `make release` for that.
 ##
 ## @category Release
-release-artifacts: server-binaries helm-chart release-containers release-manifests
+release-artifacts: server-binaries cmctl kubectl-cert_manager helm-chart release-containers release-manifests
 
 .PHONY: release-artifacts-signed
 # Same as `release-artifacts`, except also signs the Helm chart. Requires CMREL_KEY
@@ -92,6 +92,7 @@ $(bin_dir)/release/cert-manager-server-linux-amd64.tar.gz $(bin_dir)/release/cer
 	echo "$(VERSION)" > $(CTR_SCRATCHDIR)/server/images/controller.docker_tag
 	echo "$(VERSION)" > $(CTR_SCRATCHDIR)/server/images/webhook.docker_tag
 	echo "$(VERSION)" > $(CTR_SCRATCHDIR)/server/images/startupapicheck.docker_tag
+	echo "$(VERSION)" > $(CTR_SCRATCHDIR)/server/images/ctl.docker_tag
 	cp $(bin_dir)/scratch/cert-manager.license $(CTR_SCRATCHDIR)/LICENSES
 	gunzip -c $(bin_dir)/containers/cert-manager-acmesolver-linux-$*.tar.gz >$(CTR_SCRATCHDIR)/server/images/acmesolver.tar
 	gunzip -c $(bin_dir)/containers/cert-manager-cainjector-linux-$*.tar.gz >$(CTR_SCRATCHDIR)/server/images/cainjector.tar

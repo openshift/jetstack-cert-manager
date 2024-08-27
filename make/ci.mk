@@ -14,7 +14,7 @@
 
 .PHONY: verify-modules
 verify-modules: | $(NEEDS_CMREL)
-	$(CMREL) validate-gomod --path $(shell pwd) --no-dummy-modules github.com/cert-manager/cert-manager/integration-tests
+	$(CMREL) validate-gomod --path $(shell pwd) --direct-import-modules github.com/cert-manager/cert-manager/cmd/ctl --no-dummy-modules github.com/cert-manager/cert-manager/integration-tests
 
 shared_verify_targets += verify-modules
 

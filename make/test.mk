@@ -56,6 +56,7 @@ test-ci: setup-integration-tests | $(NEEDS_GOTESTSUM) $(NEEDS_ETCD) $(NEEDS_KUBE
 	cd cmd/acmesolver && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-acmesolver.xml $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
 	cd cmd/cainjector && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-cainjector.xml $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
 	cd cmd/controller && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-controller.xml $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
+	cd cmd/ctl        && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-ctl.xml        $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
 	cd cmd/webhook    && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-webhook.xml    $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
 	cd test/integration && $(GOTESTSUM) --junitfile $(ARTIFACTS)/junit_make-test-ci-integration.xml $(GOTESTSUM_CI_FLAGS) --post-run-command $$'bash -c "$(GO) run ../../hack/prune-junit-xml/prunexml.go $$GOTESTSUM_JUNITFILE"' -- ./...
 
@@ -65,7 +66,7 @@ test-ci: setup-integration-tests | $(NEEDS_GOTESTSUM) $(NEEDS_ETCD) $(NEEDS_KUBE
 ## or an apiserver.
 ##
 ## @category Development
-unit-test: unit-test-core-module unit-test-acmesolver unit-test-cainjector unit-test-controller unit-test-webhook | $(NEEDS_GOTESTSUM)
+unit-test: unit-test-core-module unit-test-acmesolver unit-test-cainjector unit-test-cmctl unit-test-controller unit-test-webhook | $(NEEDS_GOTESTSUM)
 
 .PHONY: unit-test-core-module
 unit-test-core-module: | $(NEEDS_GOTESTSUM)
@@ -78,6 +79,10 @@ unit-test-acmesolver: | $(NEEDS_GOTESTSUM)
 .PHONY: unit-test-cainjector
 unit-test-cainjector: | $(NEEDS_GOTESTSUM)
 	cd cmd/cainjector && $(GOTESTSUM) ./...
+
+.PHONY: unit-test-cmctl
+unit-test-cmctl: | $(NEEDS_GOTESTSUM)
+	cd cmd/ctl && $(GOTESTSUM) ./...
 
 .PHONY: unit-test-controller
 unit-test-controller: | $(NEEDS_GOTESTSUM)
@@ -162,8 +167,8 @@ $(bin_dir)/test/e2e.test: FORCE | $(NEEDS_GINKGO) $(bin_dir)/test
 e2e-build: $(bin_dir)/test/e2e.test
 
 .PHONY: test-upgrade
-test-upgrade: | $(NEEDS_HELM) $(NEEDS_KIND) $(NEEDS_YTT) $(NEEDS_KUBECTL) $(NEEDS_CMCTL)
-	./hack/verify-upgrade.sh $(HELM) $(KIND) $(YTT) $(KUBECTL) $(CMCTL)
+test-upgrade: | $(NEEDS_HELM) $(NEEDS_KIND) $(NEEDS_YTT) $(NEEDS_KUBECTL) $(bin_dir)/cmctl/cmctl-$(HOST_OS)-$(HOST_ARCH)
+	./hack/verify-upgrade.sh $(HELM) $(KIND) $(YTT) $(KUBECTL) $(bin_dir)/cmctl/cmctl-$(HOST_OS)-$(HOST_ARCH)
 
 $(bin_dir)/test:
 	@mkdir -p $@
