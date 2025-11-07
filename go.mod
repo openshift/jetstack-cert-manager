@@ -18,6 +18,9 @@ replace github.com/prometheus/client_golang => github.com/prometheus/client_gola
 // Can be removed once github.com/go-ldap/ldap/v3 releases a version that requires this version.
 replace github.com/go-asn1-ber/asn1-ber => github.com/go-asn1-ber/asn1-ber v1.5.6
 
+// fix for CVE-2025-27144
+replace github.com/go-jose/go-jose/v4 => github.com/go-jose/go-jose/v4 v4.0.5
+
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.12.0
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.6.0
@@ -44,7 +47,7 @@ require (
 	github.com/prometheus/client_golang v1.18.0
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	golang.org/x/crypto v0.32.0
 	golang.org/x/oauth2 v0.20.0
 	golang.org/x/sync v0.10.0
