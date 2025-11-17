@@ -19,7 +19,7 @@ replace github.com/prometheus/client_golang => github.com/prometheus/client_gola
 replace github.com/go-asn1-ber/asn1-ber => github.com/go-asn1-ber/asn1-ber v1.5.6
 
 // fix for CVE-2025-27144
-replace github.com/go-jose/go-jose/v4 => github.com/go-jose/go-jose/v4 v4.0.5
+replace github.com/go-jose/go-jose/v4 v4.0.2 => github.com/go-jose/go-jose/v4 v4.0.5
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.12.0
