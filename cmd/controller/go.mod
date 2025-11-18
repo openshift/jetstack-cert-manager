@@ -20,6 +20,9 @@ replace github.com/go-asn1-ber/asn1-ber => github.com/go-asn1-ber/asn1-ber v1.5.
 
 replace github.com/cert-manager/cert-manager => ../../
 
+// fix for CVE-2025-27144
+replace github.com/go-jose/go-jose/v4 v4.0.2 => github.com/go-jose/go-jose/v4 v4.0.5
+
 require (
 	github.com/cert-manager/cert-manager v0.0.0-00010101000000-000000000000
 	github.com/go-logr/logr v1.4.1
