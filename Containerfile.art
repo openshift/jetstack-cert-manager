@@ -10,19 +10,17 @@ ENV GOEXPERIMENT=strictfipsruntime
 ENV CGO_ENABLED=1
 ENV GOFLAGS=""
 
-RUN cd $SOURCE_DIR/cmd/acmesolver && go build -o $SOURCE_DIR/_output/acmesolver -ldflags '-w -s' -tags ${GO_BUILD_TAGS} main.go
 RUN cd $SOURCE_DIR/cmd/cainjector && go build -o $SOURCE_DIR/_output/cainjector -ldflags '-w -s' -tags ${GO_BUILD_TAGS} main.go
 RUN cd $SOURCE_DIR/cmd/controller && go build -o $SOURCE_DIR/_output/controller -ldflags '-w -s' -tags ${GO_BUILD_TAGS} main.go
 RUN cd $SOURCE_DIR/cmd/webhook && go build -o $SOURCE_DIR/_output/webhook -ldflags '-w -s' -tags ${GO_BUILD_TAGS} main.go
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest@sha256:ae09ecc3d754bc1726cbda3e2599cc7839e09fe1cc547ce173cf669b645be3cc
 
 ARG RELEASE_VERSION
 ARG COMMIT_SHA
 ARG SOURCE_URL
 ARG SOURCE_DIR="/go/src/github.com/openshift/jetstack-cert-manager"
 
-COPY --from=builder $SOURCE_DIR/_output/acmesolver /app/cmd/acmesolver/acmesolver
 COPY --from=builder $SOURCE_DIR/_output/cainjector /app/cmd/cainjector/cainjector
 COPY --from=builder $SOURCE_DIR/_output/controller /app/cmd/controller/controller
 COPY --from=builder $SOURCE_DIR/_output/webhook /app/cmd/webhook/webhook
@@ -31,6 +29,7 @@ COPY --from=builder /licenses /licenses
 USER 65534:65534
 
 LABEL com.redhat.component="jetstack-cert-manager-container" \
+      cpe="cpe:/a:redhat:cert_manager:1.19::el9" \
       name="cert-manager/jetstack-cert-manager-rhel9" \
       version="${RELEASE_VERSION}" \
       summary="cert-manager" \
