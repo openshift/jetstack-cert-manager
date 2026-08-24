@@ -17,7 +17,6 @@ limitations under the License.
 package venafi
 
 import (
-	"context"
 	"crypto/x509"
 	"errors"
 	"fmt"
@@ -756,7 +755,7 @@ func TestProcessItem(t *testing.T) {
 			builder: &testpkg.Builder{
 				CertManagerObjects: []runtime.Object{baseIssuer.DeepCopy()},
 				ExpectedEvents: []string{
-					"Warning ErrorParse Failed to parse returned certificate bundle: error decoding certificate PEM block",
+					"Warning ErrorParse Failed to parse returned certificate bundle: error decoding certificate PEM block: no valid certificates found",
 				},
 				ExpectedActions: []testpkg.Action{
 					testpkg.NewAction(coretesting.NewCreateAction(
@@ -799,7 +798,7 @@ func TestProcessItem(t *testing.T) {
 								Type:               certificatesv1.CertificateFailed,
 								Status:             corev1.ConditionTrue,
 								Reason:             "ErrorParse",
-								Message:            "Failed to parse returned certificate bundle: error decoding certificate PEM block",
+								Message:            "Failed to parse returned certificate bundle: error decoding certificate PEM block: no valid certificates found",
 								LastTransitionTime: metaFixedClockStart,
 								LastUpdateTime:     metaFixedClockStart,
 							}),
@@ -913,7 +912,7 @@ func TestProcessItem(t *testing.T) {
 			}
 			test.builder.Start()
 
-			err := controller.ProcessItem(context.Background(), types.NamespacedName{
+			err := controller.ProcessItem(t.Context(), types.NamespacedName{
 				Name: test.csr.Name,
 			})
 			if err != nil && !test.expectedErr {

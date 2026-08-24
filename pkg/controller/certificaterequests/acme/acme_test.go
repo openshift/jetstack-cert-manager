@@ -17,7 +17,6 @@ limitations under the License.
 package acme
 
 import (
-	"context"
 	"crypto"
 	"crypto/x509"
 	"crypto/x509/pkix"
@@ -242,7 +241,7 @@ func TestSign(t *testing.T) {
 				KubeObjects:        []runtime.Object{},
 				CertManagerObjects: []runtime.Object{baseCR.DeepCopy(), baseIssuer.DeepCopy()},
 				ExpectedEvents: []string{
-					"Warning RequestParsingError Failed to decode CSR in spec.request: error decoding certificate request PEM block",
+					"Warning RequestParsingError Failed to decode CSR in spec.request: error decoding certificate request PEM block: no PEM data was found in given input",
 				},
 				ExpectedActions: []testpkg.Action{
 					testpkg.NewAction(coretesting.NewUpdateSubresourceAction(
@@ -255,7 +254,7 @@ func TestSign(t *testing.T) {
 								Type:               cmapiv1.CertificateRequestConditionReady,
 								Status:             cmmeta.ConditionFalse,
 								Reason:             cmapiv1.CertificateRequestReasonFailed,
-								Message:            "Failed to decode CSR in spec.request: error decoding certificate request PEM block",
+								Message:            "Failed to decode CSR in spec.request: error decoding certificate request PEM block: no PEM data was found in given input",
 								LastTransitionTime: &metaFixedClockStart,
 							}),
 							gen.SetCertificateRequestFailureTime(metaFixedClockStart),
@@ -649,7 +648,7 @@ func runTest(t *testing.T, test testT) {
 	}
 	test.builder.Start()
 
-	err = controller.Sync(context.Background(), test.certificateRequest)
+	err = controller.Sync(t.Context(), test.certificateRequest)
 	if err != nil && !test.expectedErr {
 		t.Errorf("expected to not get an error, but got: %v", err)
 	}
