@@ -11,6 +11,12 @@ replace github.com/go-asn1-ber/asn1-ber => github.com/go-asn1-ber/asn1-ber v1.5.
 
 replace github.com/cert-manager/cert-manager => ../../
 
+replace google.golang.org/grpc => github.com/openshift-sustaining/grpc-go v1.75.1-sec.1
+
+replace golang.org/x/net => github.com/openshift-sustaining/net v0.50.0-sec.4
+
+replace golang.org/x/crypto => github.com/openshift-sustaining/crypto v0.48.0-sec.3
+
 require (
 	github.com/cert-manager/cert-manager v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.8.1
